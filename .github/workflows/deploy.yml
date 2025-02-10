@@ -1,0 +1,48 @@
+name: Deploy to Production
+
+on:
+  push:
+    branches: ["main"]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+
+      - name: Set up SSH key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          eval $(ssh-agent -s)
+          ssh-add ~/.ssh/deploy_key
+
+      - name: Add known hosts
+        run: |
+          echo "${{ secrets.SSH_KNOWN_HOSTS }}" >> ~/.ssh/known_hosts
+          chmod 644 ~/.ssh/known_hosts
+
+      - name: Run deployment
+        env:
+          SSH_AUTH_SOCK: /tmp/ssh-XXXXXXssh-agent.0
+        run: |
+          ssh -o StrictHostKeyChecking=no ubuntu@18.234.218.237 << 'EOF'
+            # Go to project directory
+            cd foodify-website
+
+            # Pull the latest code
+            git pull
+
+            # Build, tear down, and recreate containers
+            docker compose -f docker-compose.prod.yml build --no-cache
+            docker compose -f docker-compose.prod.yml down
+            docker compose -f docker-compose.prod.yml up -d --force-recreate
+
+            # Build the frontend inside the container
+            docker exec -i foodify-website-app-1 bash -c "cd app && npm run build"
+
+            # Restart app container
+            docker compose -f docker-compose.prod.yml restart app
+          EOF
