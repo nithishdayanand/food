@@ -57,7 +57,7 @@ useSharedSeoData({
 </script>
 
 <template>
-  <UContainer class="my-32">
+  <UContainer class="py-24 md:py-32 lg:py-36">
     <h1
       class="text-3xl leading-snug text-center heading md:text-4xl lg:text-5xl"
     >
@@ -66,16 +66,20 @@ useSharedSeoData({
     </h1>
 
     <div
-      class="flex flex-col mt-16 space-y-8 lg:flex-row lg:space-x-4 lg:space-y-0"
+      class="flex flex-col justify-center items-center mx-auto mt-16 max-w-6xl lg:flex-row lg:items-stretch lg:space-x-8"
     >
       <SubscriptionPlan
         v-for="plan in plans"
         :key="plan.name"
         :plan="plan"
-        class="lg:w-1/4"
+        class="w-full max-w-md lg:w-1/3"
       />
     </div>
   </UContainer>
 </template>
 
-<style scoped></style>
+<style scoped>
+.highlight {
+  @apply text-primary-600;
+}
+</style>
