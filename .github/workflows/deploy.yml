@@ -18,18 +18,13 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v3
 
-      - name: Set up SSH key
-        run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" | tr -d '\r' > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          eval $(ssh-agent -s)
-          ssh-add ~/.ssh/id_rsa
-          ssh-keyscan -H 18.234.218.237 >> ~/.ssh/known_hosts
-
-      - name: Run deployment
-        run: |
-          ssh -v -i ~/.ssh/id_rsa ubuntu@18.234.218.237 << 'EOF'
+      - name: Deploy to Server
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: 18.234.218.237
+          username: ubuntu
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
             # Go to project directory
             cd foodify-website
 
@@ -46,4 +41,3 @@ jobs:
 
             # Restart app container
             docker compose -f docker-compose.prod.yml restart app
-          EOF
