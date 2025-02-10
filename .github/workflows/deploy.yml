@@ -12,23 +12,14 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Set up SSH key
+        # This assumes you have the private key stored as a GitHub secret named SSH_PRIVATE_KEY
         run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/deploy_key
-          chmod 600 ~/.ssh/deploy_key
-          eval $(ssh-agent -s)
-          ssh-add ~/.ssh/deploy_key
-
-      - name: Add known hosts
-        run: |
-          echo "${{ secrets.SSH_KNOWN_HOSTS }}" >> ~/.ssh/known_hosts
-          chmod 644 ~/.ssh/known_hosts
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ssh_key
+          chmod 600 ssh_key
 
       - name: Run deployment
-        env:
-          SSH_AUTH_SOCK: /tmp/ssh-XXXXXXssh-agent.0
         run: |
-          ssh -o StrictHostKeyChecking=no ubuntu@18.234.218.237 << 'EOF'
+          ssh -i ssh_key -o StrictHostKeyChecking=no ubuntu@18.234.218.237 << 'EOF'
             # Go to project directory
             cd foodify-website
 
