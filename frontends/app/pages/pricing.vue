@@ -1,69 +1,72 @@
 <script setup lang="ts">
 const plans = [
   {
-    name: 'Starter',
+    name: "Starter",
     price: 500,
     features: [
-      '1 influencer visit per month',
-      'Alternating High and Medium-exposure influencers',
-      'Vetted, real creators from our network',
-      'Scheduling & payment done for you',
-      'Month-to-month basis; pause anytime'
+      "1 influencer visit per month",
+      "Alternating High and Medium-exposure influencers",
+      "Vetted, real creators from our network",
+      "Scheduling & payment done for you",
+      "Month-to-month basis; pause anytime",
     ],
-    link: 'https://buy.stripe.com/3cs6oP9dRc233ja000',
+    link: "https://buy.stripe.com/3cs6oP9dRc233ja000",
   },
   {
-    name: 'Growth',
+    name: "Growth",
     price: 700,
     highlight: true,
     features: [
-      '1 influencer visit per month',
-      'High-exposure influencers every month',
-      'Vetted, real creators from our network',
-      'Scheduling & payment done for you',
-      'Month-to-month basis; pause anytime'
+      "1 influencer visit per month",
+      "High-exposure influencers every month",
+      "Vetted, real creators from our network",
+      "Scheduling & payment done for you",
+      "Month-to-month basis; pause anytime",
     ],
-    link: 'https://buy.stripe.com/cN214v9dRgij2f6aEF',
+    link: "https://buy.stripe.com/cN214v9dRgij2f6aEF",
   },
   {
-    name: 'Custom',
+    name: "Custom",
     price: 1000,
     features: [
-      '1 influencer visit per month',
-      'Ability to choose influencers from our network',
-      'Vetted, real creators from our network',
-      'Scheduling & payment done for you',
-      'Month-to-month basis; pause anytime'
+      "1 influencer visit per month",
+      "Ability to choose influencers from our network",
+      "Vetted, real creators from our network",
+      "Scheduling & payment done for you",
+      "Month-to-month basis; pause anytime",
     ],
-    link: 'https://buy.stripe.com/00g8wX0HlaXZbPG146',
+    link: "https://buy.stripe.com/00g8wX0HlaXZbPG146",
   },
   {
-    name: 'Full',
+    name: "Full",
     price: 2500,
     features: [
-      'Social media management included',
-      'Monthly content shoots and daily Instagram management',
-      '1 influencer post per month',
-      'Exposure on Instagram and TikTok',
-      'High exposure influencers only',
-      'Local influencers matched for you',
+      "Social media management included",
+      "Monthly content shoots and daily Instagram management",
+      "1 influencer post per month",
+      "Exposure on Instagram and TikTok",
+      "High exposure influencers only",
+      "Local influencers matched for you",
     ],
-    link: 'https://buy.stripe.com/6oEeVl9dR1np4neeUX',
+    link: "https://buy.stripe.com/6oEeVl9dR1np4neeUX",
   },
-]
+];
 
-const title = ref('We're investing in you, just as you are in us. - FoodiFy')
+const title = ref("We're investing in you, just as you are in us. - FoodiFy");
 
 useHead({
   title,
   meta: [
-    { name: 'description', content: 'Restaurant marketing redefined for the social media age.' },
+    {
+      name: "description",
+      content: "Restaurant marketing redefined for the social media age.",
+    },
   ],
-})
+});
 
 useSharedSeoData({
   title,
-})
+});
 </script>
 
 <template>
