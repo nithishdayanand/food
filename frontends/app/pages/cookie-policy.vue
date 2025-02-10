@@ -11,7 +11,7 @@ useHead({
 </script>
 
 <template>
-  <div class="py-12 sm:py-16">
+  <div class="py-12 pt-24 sm:py-16">
     <UContainer>
       <div class="mx-auto max-w-3xl">
         <h1 class="mb-8 text-4xl font-bold tracking-tight">Cookie Policy</h1>
