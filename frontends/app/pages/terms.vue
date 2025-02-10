@@ -12,14 +12,14 @@ useHead({
 </script>
 
 <template>
-  <div class="py-12 pt-24 sm:py-16">
+  <div class="pt-24 pb-16 md:pt-32 md:pb-24 lg:pt-36 lg:pb-30">
     <UContainer>
-      <div class="max-w-3xl mx-auto">
-        <h1 class="mb-8 text-4xl font-bold tracking-tight">
+      <div class="mx-auto max-w-3xl">
+        <h1 class="mb-8 text-4xl font-bold tracking-tight text-gray-900">
           Terms and Conditions
         </h1>
 
-        <div class="prose max-w-none prose-slate">
+        <div class="max-w-none prose prose-slate prose-lg">
           <p class="mb-8 text-lg">
             Welcome to Foodify! These Terms and Conditions ("Terms") govern your
             use of the Foodify platform and services. By accessing or using our
@@ -200,15 +200,18 @@ useHead({
 
 <style scoped>
 .prose h2 {
-  @apply text-2xl font-semibold mt-8 mb-4;
+  @apply text-2xl font-semibold mt-12 mb-6 text-gray-900;
 }
 .prose h3 {
-  @apply text-xl font-semibold mt-6 mb-3;
+  @apply text-xl font-semibold mt-8 mb-4 text-gray-900;
 }
 .prose p {
-  @apply mb-4;
+  @apply mb-6 text-gray-600;
 }
 .prose ul {
-  @apply list-disc pl-6 mb-4;
+  @apply list-disc pl-6 mb-6 text-gray-600;
+}
+.prose li {
+  @apply mb-2;
 }
 </style>

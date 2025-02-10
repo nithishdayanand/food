@@ -14,9 +14,16 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    environment: production
+    concurrency:
+      group: production_environment
+      cancel-in-progress: false
+
     steps:
       - name: Check out code
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
       - name: Deploy to Server
         uses: appleboy/ssh-action@v1.0.0
@@ -24,20 +31,55 @@ jobs:
           host: 18.234.218.237
           username: ubuntu
           key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script_stop: true # Stop script if any command fails
           script: |
+            set -e # Exit on any error
+            echo "Starting deployment..."
+
             # Go to project directory
-            cd foodify-website
+            cd foodify-website || exit 1
 
             # Pull the latest code
+            echo "Pulling latest code..."
             git pull
 
-            # Build, tear down, and recreate containers
-            docker compose -f docker-compose.prod.yml build --no-cache
-            docker compose -f docker-compose.prod.yml down
-            docker compose -f docker-compose.prod.yml up -d --force-recreate
+            # Build and deploy with error handling
+            echo "Building and deploying containers..."
+            {
+              # Build containers
+              docker compose -f docker-compose.prod.yml build --no-cache
+              
+              # Stop and remove existing containers
+              docker compose -f docker-compose.prod.yml down
+              
+              # Start new containers
+              docker compose -f docker-compose.prod.yml up -d --force-recreate
+              
+              # Wait for containers to be healthy
+              sleep 10
+              
+              # Build the frontend
+              echo "Building frontend..."
+              docker exec -i foodify-website-app-1 bash -c "cd app && npm run build"
+              
+              # Restart app container
+              echo "Restarting app container..."
+              docker compose -f docker-compose.prod.yml restart app
+              
+              echo "Deployment completed successfully!"
+            } || {
+              echo "Deployment failed!"
+              exit 1
+            }
 
-            # Build the frontend inside the container
-            docker exec -i foodify-website-app-1 bash -c "cd app && npm run build"
+      - name: Notify on success
+        if: success()
+        run: |
+          echo "Deployment completed successfully!"
+          # Add notification commands here if needed (e.g., Slack, Discord, etc.)
 
-            # Restart app container
-            docker compose -f docker-compose.prod.yml restart app
+      - name: Notify on failure
+        if: failure()
+        run: |
+          echo "Deployment failed!"
+          # Add notification commands here if needed

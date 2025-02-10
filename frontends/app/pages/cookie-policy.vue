@@ -11,13 +11,15 @@ useHead({
 </script>
 
 <template>
-  <div class="py-12 pt-24 sm:py-16">
+  <div class="pt-24 pb-16 md:pt-32 md:pb-24 lg:pt-36 lg:pb-30">
     <UContainer>
       <div class="mx-auto max-w-3xl">
-        <h1 class="mb-8 text-4xl font-bold tracking-tight">Cookie Policy</h1>
+        <h1 class="mb-8 text-4xl font-bold tracking-tight text-gray-900">
+          Cookie Policy
+        </h1>
 
-        <div class="max-w-none prose prose-slate">
-          <p class="text-lg">
+        <div class="max-w-none prose prose-slate prose-lg">
+          <p class="mb-8 text-lg text-gray-600">
             Last updated: {{ new Date().toLocaleDateString() }}
           </p>
 
@@ -80,12 +82,18 @@ useHead({
 
 <style scoped>
 .prose h2 {
-  @apply text-2xl font-semibold mt-8 mb-4;
+  @apply text-2xl font-semibold mt-12 mb-6 text-gray-900;
+}
+.prose h3 {
+  @apply text-xl font-semibold mt-8 mb-4 text-gray-900;
 }
 .prose p {
-  @apply mb-4;
+  @apply mb-6 text-gray-600;
 }
 .prose ul {
-  @apply list-disc pl-6 mb-4;
+  @apply list-disc pl-6 mb-6 text-gray-600;
+}
+.prose li {
+  @apply mb-2;
 }
 </style>
