@@ -12,7 +12,7 @@ useHead({
 </script>
 
 <template>
-  <div class="py-12 sm:py-16">
+  <div class="py-12 pt-24 sm:py-16">
     <UContainer>
       <div class="max-w-3xl mx-auto">
         <h1 class="mb-8 text-4xl font-bold tracking-tight">
