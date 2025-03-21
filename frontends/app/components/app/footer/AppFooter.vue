@@ -70,7 +70,7 @@ const links = [
           color="gray"
           variant="ghost"
           rel="noreferrer noopener"
-          to="https://www.instagram.com/foodify_influencers?igsh=bHZ0MWMxMXJqNzQ3&utm_source=website"
+          to="https://www.instagram.com/foodify_us?utm_source=website"
           target="_blank"
         />
         <UButton

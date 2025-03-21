@@ -21,7 +21,6 @@ const influencers = ref([
   { name: 'Dallas Hot Spots', image: 'dallas-hot-spots', followers: '192k' },
   { name: 'Brittany Rose Blog', image: 'brittany-rose-blog', followers: '190k' },
   { name: 'Dubbs Grubs', image: 'dubbs-grubs', followers: '177k' },
-  { name: 'Dallas Love List', image: 'dallas-love-list', followers: '890k' },
 ])
 </script>
 
