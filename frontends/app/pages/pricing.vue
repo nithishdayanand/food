@@ -5,7 +5,7 @@ const plans = [
     price: 500,
     features: [
       "**1 influencer visit** per month",
-      "Alternating **High and Medium-exposure** influencers",
+      "Alternating **High and Micro-exposure** influencers",
       "**Vetted, real creators** from our network",
       "**Scheduling & payment** done for you",
       "Month-to-month basis; **pause anytime**",
@@ -18,7 +18,7 @@ const plans = [
     highlight: true,
     features: [
       "**1 influencer visit** per month",
-      "**High-exposure influencers** every month",
+      "Alternating **High and Medium-exposure** influencers",
       "**Vetted, real creators** from our network",
       "**Scheduling & payment** done for you",
       "Month-to-month basis; **pause anytime**",
@@ -30,7 +30,7 @@ const plans = [
     price: 1000,
     features: [
       "**1 influencer visit** per month",
-      "**Ability to choose** influencers from our network",
+      "**High-exposure influencers** only every month",
       "**Vetted, real creators** from our network",
       "**Scheduling & payment** done for you",
       "Month-to-month basis; **pause anytime**",
@@ -70,7 +70,7 @@ useSharedSeoData({
     >
       <SubscriptionPlan
         v-for="plan in plans"
-        :key="plan.name"
+        :key=" plan.name"
         :plan="plan"
         class="w-full max-w-md lg:w-1/3"
       />
